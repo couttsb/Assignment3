@@ -1,0 +1,13 @@
+package ca.mcgill.ecse321.loyaltypoints;
+
+public class OperationThresholdPoints implements PointsStrategy{
+	@Override
+	public float getPoints(float price) {
+		if (price >= 100) {
+			return (price)*2;
+		}
+		else {
+			return 0;
+		}
+	}
+}

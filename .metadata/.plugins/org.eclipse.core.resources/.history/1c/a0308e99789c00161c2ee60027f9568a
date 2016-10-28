@@ -1,0 +1,9 @@
+package ca.mcgill.ecse321.loyaltypoints;
+
+public class OperationFlatRatePoints implements Strategy{
+	@Override
+	public float doOperation(float price) {
+		num1 = 25;
+		return num1;
+	}
+}
