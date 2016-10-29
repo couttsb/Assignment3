@@ -5,30 +5,27 @@ import java.util.Scanner;
 
 public class Purchase {
 	
-	public static String Name() {
+	// This class will take a user input of shopper name and total grocery price and return the values as an array of objects. These different 
+	// variable types are combined together to limit the number of scanners in the program to one. Since the types of the input values must be 
+	// different, the array is initialized to contain objects. These objects are converted to their proper type in StrategyPatternDemo.java
+	public static Object[] PurchaseAttributes() {
 		String name;
+		double price;
+		Object[] array;
 		
 		try(Scanner input = new Scanner(System.in)) {
-			System.out.print("Enter the shoppers name: ");
+			System.out.print("Enter the Customer's Name: ");
 			name = input.next();
-		}
-		return name;
-	}
-	
-	public static double Price() {		
-		double price;
-		
-		try(Scanner input2 = new Scanner(System.in)) {
-			System.out.println("Enter the total price of the groceries: ");
-			price = input2.nextDouble(); 
 			
+			System.out.println("Enter the Total Price of the Groceries: ");
+			price = input.nextDouble(); 
 			while (price <= 0) {
-				System.out.println("Please enter a price value greater than 0! ");
-				System.out.println("Enter the total price of the groceries: ");
-				price = input2.nextDouble();
+				System.out.println("Price Must be Greater than 0! ");
+				price = input.nextDouble(); 
 			}
 		}
-		return price;
+		array = new Object[]{name, price};
+		return array;
 	}
 	
 	public static Date Date() {

@@ -5,16 +5,23 @@ import java.util.Date;
 public class StrategyPatternDemo {
 	
 	public static void main(String[] args) {
+		String name;
+		double price;
+		Date date;
 		
-		String name = Purchase.Name();
-		double price = Purchase.Price();
-		Date date = Purchase.Date();		
+		// In order to limit the purchase class to having one scanner, an array of objects was required due to the multiple variable types.
+		// The objects were converted to string and then the price was converted from string to double to get each variable to its proper type.
+		Object[] array = Purchase.PurchaseAttributes();
+		name = array[0].toString();
+		price = Double.parseDouble(array[1].toString());
+		date = Purchase.Date();		
 		
+		// Determines the point total that would be obtained using the flat-rate point strategy
 		Purchase purchase = new Purchase(new OperationFlatRatePoints());	
 		int flatratepoints = purchase.executeStrategy(price);
 		System.out.println("Flat-Rate Points = " + flatratepoints); 
-			
 
+		// Determines the point total that would be obtained using the per-dollar point strategy
 		purchase = new Purchase(new OperationPerDollarPoints());	
 		int perdollarpoints = purchase.executeStrategy(price);
 		if (price > 500) {
@@ -22,6 +29,7 @@ public class StrategyPatternDemo {
 		}
 		System.out.println("Per-Dollar Points = " + perdollarpoints);
 
+		// Determines the point total that would be obtained using the threshold point strategy
 		purchase = new Purchase(new OperationThresholdPoints());	
 		int thresholdpoints = purchase.executeStrategy(price);
 		if (price >= 100 && price <= 250) {
@@ -32,6 +40,8 @@ public class StrategyPatternDemo {
 		}
 		System.out.println("Threshold Points = " + thresholdpoints);
 		
+		// Chooses the strategy that maximizes the number of points for the customer. Prints the customer's name, their point strategy and 
+		// point total, and the date of purchase. 
 		System.out.println("");
 		System.out.println("Shopper name: " + name);
 		if (flatratepoints > perdollarpoints && flatratepoints > thresholdpoints) {
